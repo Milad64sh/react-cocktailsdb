@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 export default function SingleCocktail() {
   const { id } = useParams();
@@ -55,5 +55,37 @@ export default function SingleCocktail() {
     }
     getCocktail();
   }, [id]);
-  return <h1>single cocktail page</h1>;
+  if (loading) {
+    return <h2 className='section-title'>loading...</h2>;
+  }
+  if (!cocktail) {
+    return <h2 className='section-title'>no cocktail to display</h2>;
+  } else {
+    const { name, image, category, info, glass, instructions, ingredients } =
+      cocktail;
+    return (
+      <section className='section cocktail-section'>
+        <Link to='/' className='btn btn-primary'>
+          back home
+        </Link>
+        <h2 className='section-title'>{name}</h2>
+        <div className='drink'>
+          <img src={image} alt={name} />
+          <div className='drink-info'>
+            <p>name: {name}</p>
+            <p>category: {category}</p>
+            <p>info: {info}</p>
+            <p>glass: {glass}</p>
+            <p>instructions: {instructions}</p>
+            <p>
+              ingredients:{' '}
+              {ingredients.map((item, index) => {
+                return item ? <span key={index}>{item}</span> : null;
+              })}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 }
