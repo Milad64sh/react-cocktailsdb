@@ -22,7 +22,7 @@ export default function Home() {
             return {
               id: idDrink,
               name: strDrink,
-              imafe: strDrinkThumb,
+              image: strDrinkThumb,
               info: strAlcoholic,
               glass: strGlass,
             };
